@@ -1,18 +1,36 @@
-# Publish this prepared Git repository
+# Repository setup and release notes
 
-The repository was prepared locally. The GitHub repository **has not been created** yet.
+**GitHub repository:** https://github.com/JadenChun/dsh-trace
 
-1. On your signed-in GitHub account, create a new **empty** repository named `dsh-trace-studio` at https://github.com/new. Select **Private** initially if you will be testing against real agent traces. Do **not** initialize it with a README, .gitignore, or license: those files are already in this project.
-2. Extract the ZIP and change into the `dsh-trace-studio` directory. It contains an initial Git commit on `main`.
-3. Run:
+The source is already committed to the `main` branch. You do **not** need to create another repository or re-upload the original ZIP.
 
-   ```bash
-   git remote add origin https://github.com/JadenChun/dsh-trace-studio.git
-   git push -u origin main
-   ```
+## Clone and verify
 
-   Authenticate to GitHub with an approved credential manager, SSH remote, or the GitHub CLI. Do not paste an access token into scripts, chat, or the repository.
+```bash
+git clone https://github.com/JadenChun/dsh-trace.git
+cd dsh-trace
+npm run check
+npm test
+npm run pack:dry
+```
 
-4. Verify the repository's `README.md` displays screenshots, and then install it with the local `link:` command in the README. Publishing or deploying to a public production DSH server is not recommended until you have reviewed the security notes and verified the plugin against your installed DSH version.
+Requires Node.js 20+; the current scripts do not require a package install. CI runs these checks on Node 20 and 22.
 
-If your actual target GitHub owner/repository differs, update the remote URL before pushing.
+## Install the local plugin
+
+```bash
+dsh plugin --profile web add link:/absolute/path/to/dsh-trace
+```
+
+Restart `dsh web` and hard-refresh the browser. The panel uses DSH's light/dark semantic CSS tokens. The local preview is at `demo/sidebar.html`, served via a local HTTP server.
+
+## Release readiness checklist
+
+- Verify plugin registration and SSE history/live updates against the actual installed DSH version.
+- Compare the sidebar layout against DSH's native light/dark UI.
+- Verify authentication and safe access to trace endpoints.
+- Run `npm run check`, `npm test`, and `npm run pack:dry`.
+- Review changes for secrets and confirm no real trace screenshots or fixtures are committed.
+- Confirm package metadata and version before tagging or publishing.
+
+**Current status:** v0.3.1 developer preview; live DSH integration remains unverified. Do not treat this as a production release.
