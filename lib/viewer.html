@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trace Studio · DSH</title>
+  <link rel="stylesheet" href="/trace-studio/viewer.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">⌘</span><div><strong>Trace Studio</strong><small>DSH observability</small></div></div>
+      <div class="toolbar-mid"><span class="crumb">Workspace</span><span class="chev">/</span><span class="crumb-active">Agent traces</span></div>
+      <div class="toolbar-right"><span id="connection" class="connection"><i></i> Connecting</span><a id="full" class="top-link" href="#" target="_blank" rel="noopener noreferrer">↗ Full screen</a></div>
+    </header>
+    <div class="workspace">
+      <aside class="navigator">
+        <div class="side-header"><div><span class="eyebrow">OBSERVABILITY</span><h2>Trace explorer</h2></div><button id="reload" class="icon-btn" title="Refresh trace">↻</button></div>
+        <div class="session-block"><label for="session">SESSION</label><input id="session" placeholder="Session ID" autocomplete="off" /><button id="load" class="load-btn">Load trace <span>→</span></button></div>
+        <div class="section-head"><span>EXECUTION</span><span id="runCount">0 steps</span></div>
+        <div class="search"><span>⌕</span><input id="filter" placeholder="Search steps and tools…" /><kbd>⌘ K</kbd></div>
+        <div class="list" id="traceList"><div class="empty-side">No trace loaded</div></div>
+        <div class="nav-footer"><span class="live-dot"></span><div><strong>Read-only inspection</strong><small>Local DSH runtime · No telemetry</small></div></div>
+      </aside>
+      <main class="main-area">
+        <div class="page-head"><div class="page-heading"><div class="eyebrow">RUN EXPLORER <span class="separator">/</span> <span id="runRef">CURRENT SESSION</span></div><h1 id="runTitle">Agent execution trace</h1><p id="runSub">Examine agent steps, tool I/O, durations, and model metadata.</p></div><div class="head-actions"><button id="export" class="outline-btn">↓ JSON</button></div></div>
+        <div class="metrics"><div class="metric"><span>STATUS</span><strong id="metricStatus">—</strong><small>Latest run state</small></div><div class="metric"><span>STEPS</span><strong id="metricSteps">0</strong><small>Model invocations</small></div><div class="metric"><span>TOOL CALLS</span><strong id="metricTools">0</strong><small id="metricErrors">0 failed</small></div><div class="metric"><span>DURATION</span><strong id="metricDuration">—</strong><small>Observed wall time</small></div></div>
+        <div class="work-pane"><div class="work-head"><div class="tabs"><button id="timelineTab" class="tab selected">☷ &nbsp; Timeline</button><button id="graphTab" class="tab">◇ &nbsp; Flow graph</button></div><div class="work-hint" id="scopeLabel">Select a node for details</div></div>
+          <div id="timeline" class="timeline-area"><div id="timelineContent" class="timeline-content"></div></div>
+          <div id="graph" class="graph-area hidden"><div class="graph-controls"><button id="zoomOut" title="Zoom out">−</button><span id="zoomLabel">100%</span><button id="zoomIn" title="Zoom in">+</button><button id="fit" title="Reset zoom">Fit</button></div><div id="graphSurface" class="graph-surface"><svg id="graphSvg" xmlns="http://www.w3.org/2000/svg" aria-label="Execution flow diagram"></svg></div></div>
+        </div>
+      </main>
+      <aside class="inspector mobile-hidden"><div class="inspector-head"><div><span class="eyebrow">INSPECTOR</span><h2 id="inspectTitle">Node details</h2></div><span id="inspectType" class="node-type">SELECT</span><button id="closeInspector" class="icon-btn inspector-close" aria-label="Close inspector">×</button></div><div class="inspect-scroll"><div id="inspectContent"><div class="placeholder-glyph">⌁</div><strong>Explore a step</strong><p>Select a model invocation or tool call to view its metadata, input, output, and timing.</p></div></div></aside>
+    </div>
+  </div>
+  <script type="module" src="/trace-studio/viewer.js"></script>
+</body>
+</html>

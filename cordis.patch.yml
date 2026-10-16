@@ -1,0 +1,9 @@
+# Installed automatically by `dsh plugin --profile web add link:/path/to/dsh-trace-studio`.
+- insert:
+    - id: trace-studio
+      name: dsh-trace-studio
+      config:
+        maxSessions: 24
+        maxEvents: 12000
+        maxFieldChars: 30000
+        throttleMs: 250

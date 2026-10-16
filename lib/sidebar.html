@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Trace · DSH</title>
+  <link rel="stylesheet" href="/trace-studio/sidebar.css" />
+</head>
+<body>
+  <div class="trace-shell" id="app">
+    <header class="trace-header">
+      <div class="titlebar">
+        <span class="title-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h4l3-7 4 3 3-8 4 2"/><circle cx="17" cy="6" r="1"/></svg></span>
+        <strong>Agent trace</strong>
+        <span class="connection waiting" id="connection" role="status" aria-live="polite"><span class="pulse"></span> Connecting</span>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="searchButton" class="icon-button" title="Filter steps" aria-label="Filter steps" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>
+        <button type="button" id="refreshButton" class="icon-button" title="Refresh trace" aria-label="Refresh trace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 6M20 4v7h-7"/></svg></button>
+      </div>
+    </header>
+    <div class="searchbar" id="searchbar" hidden><input id="search" type="search" placeholder="Filter steps and tools" aria-label="Filter steps and tools" autocomplete="off" /></div>
+    <section class="run-header" aria-label="Current task">
+      <div class="run-label">Current task</div>
+      <h1 id="taskTitle">Waiting for a session</h1>
+      <p id="taskDetail">Start an agent run to see its execution steps.</p>
+      <div class="run-stats"><span><b id="totalSteps">0</b> steps</span><span class="dotsep">·</span><span><b id="totalTools">0</b> tools</span><span class="dotsep">·</span><span id="totalTime">—</span></div>
+    </section>
+    <div class="section-label"><span>Steps</span><span id="progressText">No steps yet</span></div>
+    <main class="trace-scroll" id="traceScroll" aria-label="Execution steps"><div id="steps" class="steps"><div class="empty-message">No trace loaded</div></div></main>
+    <footer class="trace-footer"><span class="privacy" title="Only recorded activity and provider-exposed model reasoning are displayed">Recorded activity</span><a id="fullLink" href="/trace-studio/view" target="_blank" rel="noopener noreferrer">Full trace ↗</a></footer>
+  </div>
+  <script type="module" src="/trace-studio/sidebar.js"></script>
+</body>
+</html>
