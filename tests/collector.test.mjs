@@ -13,9 +13,10 @@ test('DSH event projection preserves turn/step and tool lineage',()=>{
   applySessionEvent(t,ev('tool/call',{turn:1,step:1,callId:'call1',name:'read_file',arguments:'{"path":"auth.ts"}'},1300));
   applySessionEvent(t,ev('tool/result',{turn:1,step:1,message:{source:{callId:'call1'},content:[{type:'text',text:'file output'}]}},1400));
   applySessionEvent(t,ev('step/end',{turn:1,step:1},1500));
-  applySessionEvent(t,ev('turn/end',{turn:1},1500));
+  applySessionEvent(t,ev('turn/end',{turn:1,reason:{kind:'completed'}},1500));
   const out=project(t);const step=out.turns[0].steps[0];
   assert.equal(out.turns[0].title,'Why did auth fail?');
+  assert.equal(out.turns[0].endReason,'completed');
   assert.equal(step.reasoning,'Check logs');
   assert.equal(step.model,'deepseek-reasoner');
   assert.equal(step.status,'success');
